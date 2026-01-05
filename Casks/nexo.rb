@@ -18,6 +18,12 @@ cask "nexo" do
 
   app "Nexo.app"
 
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-cr", "#{appdir}/Nexo.app"],
+                   sudo: false
+  end
+
   caveats <<~EOS
     If you encounter the "Nexo is damaged and can't be opened" error, please run the following command:
       xattr -cr #{appdir}/Nexo.app
