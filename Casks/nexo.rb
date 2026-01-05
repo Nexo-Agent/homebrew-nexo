@@ -4,7 +4,7 @@ cask "nexo" do
   version "0.1.0"
   sha256 :no_check
 
-  url "https://github.com/Nexo-Agent/nexo/releases/download/v#{version}/Nexo_#{version}_#{arch}.dmg"
+  url "https://github.com/Nexo-Agent/nexo/releases/download/#{version}/Nexo_#{version}_#{arch}.dmg"
   name "Nexo"
   desc "A Smart AI Assistant for Everyone"
   homepage "https://nexo.nkthanh.dev/"
