@@ -19,6 +19,11 @@ cask "nexo" do
 
   app "Nexo.app"
 
+  caveats <<~EOS
+    If you encounter the "Nexo is damaged and can't be opened" error, please run the following command:
+      xattr -cr #{appdir}/Nexo.app
+  EOS
+
   zap trash: [
     "~/Library/Application Support/com.nexo.app",
     "~/Library/Caches/com.nexo.app",
