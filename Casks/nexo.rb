@@ -1,7 +1,7 @@
 cask "nexo" do
   arch arm: "aarch64", intel: "x64"
 
-  version "0.1.0-alpha.37"
+  version "0.1.0-alpha.38"
   sha256 :no_check
 
   url "https://github.com/Nexo-Agent/nexo/releases/download/#{version}/Nexo_#{version}_#{arch}.dmg"
