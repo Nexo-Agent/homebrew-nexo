@@ -1,0 +1,29 @@
+name: Update Homebrew Cask from Release
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [tauri-release]
+
+jobs:
+  update:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout tap
+        uses: actions/checkout@v4
+
+      - name: Get release info
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ github.event.client_payload.version }}"
+
+          sed -i '' "s/version \".*\"/version \"$VERSION\"/" Casks/nexo.rb
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git commit -am "Update nexo to v${{ github.event.client_payload.version }}"
+          git push
