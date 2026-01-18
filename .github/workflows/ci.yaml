@@ -2,8 +2,11 @@ name: Update Homebrew Cask from Release
 
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [tauri-release]
+    inputs:
+      version:
+        description: "Version to update (e.g., 0.1.0-beta.1)"
+        required: true
+        type: string
 
 jobs:
   update:
@@ -17,7 +20,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION="${{ github.event.client_payload.version }}"
+          VERSION="${{ inputs.version }}"
 
           sed -i '' "s/version \".*\"/version \"$VERSION\"/" Casks/nexo.rb
 
@@ -25,5 +28,5 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git commit -am "Update nexo to v${{ github.event.client_payload.version }}"
+          git commit -am "Update nexo to v${{ inputs.version }}"
           git push
